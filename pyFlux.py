@@ -1,18 +1,18 @@
 from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_login import LoginManager, login_user, logout_user, login_required
-from preston import preston
-
+from preston import Preston
 
 # Main Flask app
 app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
 
 # ESI API connection
-ESI = preston.Preston(
+ESI = Preston(
     user_agent='pyFlux EVE test',
     client_id=app.config['EVE_OAUTH_CLIENT_ID'],
     client_secret=app.config['EVE_OAUTH_SECRET'],
-    callback_url=app.config['EVE_OAUTH_CALLBACK']
+    callback_url=app.config['EVE_OAUTH_CALLBACK'],
+    scope=app.config['EVE_OAUTH_SCOPE']
 )
 
 # # DB connection
